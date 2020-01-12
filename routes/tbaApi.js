@@ -1,5 +1,6 @@
 const request = require('request');
 const moment = require('moment');
+
 function pathData(path) {
     return new Promise((resolve, reject) => {
         var list = {
@@ -14,19 +15,67 @@ function pathData(path) {
         });
     });
 };
+
+// function eventList(eventKey) {
+//     return new Promise((resolve, reject) => {
+//         pathData(`/event${eventKey}/teams`).then(snapshot => {
+//             teams = [];
+//             for (var i in snapshot) {
+//                 teams.push(snapshot[i]["team_number"]);
+//             }
+//             resolve(teams);
+//         });
+//     })
+// };
+// eventList('/2020ohmv').then(snapshot => {
+//     console.log(snapshot);
+// });
+
+// function eventCheck(eventId) {
+//     return new Promise((resolve, reject) => {
+//         pathData(`/event/${eventId}/matches/simple`).then(snapshot => {
+//             if ("Errors" in snapshot) {
+//                 resolve(false);
+//             }
+//             else {
+//                 resolve(snapshot);
+//             }
+//         })
+//     })
+// }
+// eventCheck('bad').then(snapshot => {
+//     console.log(snapshot);
+// })
+
+// function eventRankings(eventId) {
+//     return new Promise((resolve, reject) => {
+//         pathData(`/event/${eventId}/rankings`).then(snapshot => {
+//             rankings = [];
+//             for (var i in snapshot["rankings"]) {
+//                 rankings.push(snapshot["rankings"][i]["team_key"]);   
+//             }
+//             resolve(rankings);
+//         });
+//     })
+// }
+// eventRankings('2019casj').then(snapshot => {
+//     console.log(snapshot);
+// })
+
 function matchData(eventId) {
     return new Promise((resolve, reject) => {
         pathData(`/event/${eventId}/matches`).then(snapshot => {
             var array = [];
             for (var i in snapshot) {
                 // console.log(snapshot[i]["alliances"]["red"]["team_keys"])
+                
                 var object = {
                     time: moment(snapshot[i]["predicted_time"]).format("h:mm"),
                     match: snapshot[i]["match_number"],
                     blue: snapshot[i]["alliances"]["blue"]["team_keys"].map(x => x.replace('frc', '')),
                     red: snapshot[i]["alliances"]["red"]["team_keys"].map(x => x.replace('frc', ''))
                 }
-                // console.log(moment(snapshot[i]["predicted_time"]).format("h:mm"));
+                console.log(moment(snapshot[i]["predicted_time"]).format("h:mm"));
                 array.push(object);
             }
             resolve(array);
@@ -34,10 +83,5 @@ function matchData(eventId) {
     })
 }
 matchData('2019casj').then(snapshot => {
-    console.log(snapshot)  
+    console.log(snapshot)
 })
-
-
-
-
-
