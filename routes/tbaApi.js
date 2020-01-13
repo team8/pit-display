@@ -16,6 +16,32 @@ function pathData(path) {
     });
 };
 
+function matchData(eventId) {
+    return new Promise((resolve, reject) => {
+        pathData(`/event/${eventId}/matches`).then(snapshot => {
+            var array = [];
+            if ("qm" in snapshot[i]["comp_level"]) {
+                for (var i in snapshot) {
+                    console.log(snapshot[i])
+                    var object = {
+                        time: moment(snapshot[i]["predicted_time"]).format("h:mm"),
+                        match: snapshot[i]["match_number"],
+                        blue: snapshot[i]["alliances"]["blue"]["team_keys"].map(x => x.replace('frc', '')),
+                        red: snapshot[i]["alliances"]["red"]["team_keys"].map(x => x.replace('frc', ''))
+                    }
+                    console.log(moment(snapshot[i]["predicted_time"]).format("h:mm"));
+                    array.push(object);
+                }
+                resolve(array);
+            }
+            console.log(snapshot[i])
+        })
+    })
+}
+matchData('2019casj').then(snapshot => {
+    console.log(snapshot)
+})
+
 // function eventList(eventKey) {
 //     return new Promise((resolve, reject) => {
 //         pathData(`/event${eventKey}/teams`).then(snapshot => {
@@ -62,26 +88,5 @@ function pathData(path) {
 //     console.log(snapshot);
 // })
 
-function matchData(eventId) {
-    return new Promise((resolve, reject) => {
-        pathData(`/event/${eventId}/matches`).then(snapshot => {
-            var array = [];
-            for (var i in snapshot) {
-                // console.log(snapshot[i]["alliances"]["red"]["team_keys"])
-                
-                var object = {
-                    time: moment(snapshot[i]["predicted_time"]).format("h:mm"),
-                    match: snapshot[i]["match_number"],
-                    blue: snapshot[i]["alliances"]["blue"]["team_keys"].map(x => x.replace('frc', '')),
-                    red: snapshot[i]["alliances"]["red"]["team_keys"].map(x => x.replace('frc', ''))
-                }
-                console.log(moment(snapshot[i]["predicted_time"]).format("h:mm"));
-                array.push(object);
-            }
-            resolve(array);
-        })
-    })
-}
-matchData('2019casj').then(snapshot => {
-    console.log(snapshot)
-})
+exports.matchData = matchData
+exports.pathData = pathData

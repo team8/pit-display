@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -20,22 +21,22 @@
 
       <thead>
           <tr>
-              <th class="table-dark">Match #</th>
-              <th class="table-dark">Time</th>
+              <th>Match #</th>
               <th class="table-primary">Blue Alliance</th>
               <th class="table-danger">Red Alliance</th>
+              <th>Time</th>
               
           </tr>
       </thead>
       <tbody>
+        <% for(var i in array) { %>
           <tr>
-              <td>1</td>
-              <td>Tiger Nixon</td>
-              <td>System Architect</td>
-              <td>Sss</td>
-
-           
+              <td><%= array[i]["match"] %></td>
+              <td class="table-primary"><%= array[i]["blue"] %></td>
+              <td class="table-danger"><%= array[i]["red"] %></td>
+              <td><%= array[i]["time"] %></td>
           </tr>
+        <% } %>
           <tr>
               <td>2</td>
               <td>Garrett Winters</td>
