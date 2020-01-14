@@ -5,7 +5,7 @@ const match = require('./tbaApi')
 /* GET home page. */
 router.get('/', function(req, res, next) {
   // var data = req.body
-  match.matchData("2019casj").then(snapshot => {
+  match.matchData('2019casj').then(snapshot => {
     res.render('index', { title: 'Team 8 Matches', array: snapshot });
   })
 });

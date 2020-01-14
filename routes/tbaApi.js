@@ -20,27 +20,30 @@ function matchData(eventId) {
     return new Promise((resolve, reject) => {
         pathData(`/event/${eventId}/matches`).then(snapshot => {
             var array = [];
-            if ("qm" in snapshot[i]["comp_level"]) {
-                for (var i in snapshot) {
-                    console.log(snapshot[i])
+            for (var i in snapshot) {
+                if ("qm" == snapshot[i]["comp_level"]) {
+                    // console.log(snapshot[i]["predicted_time"])
+                    var date = new Date(snapshot[i]["predicted_time"] *1000);
+                    console.log(date);
                     var object = {
-                        time: moment(snapshot[i]["predicted_time"]).format("h:mm"),
+                        time: (`${date.getHours()}:${date.getMinutes()}`),
                         match: snapshot[i]["match_number"],
                         blue: snapshot[i]["alliances"]["blue"]["team_keys"].map(x => x.replace('frc', '')),
                         red: snapshot[i]["alliances"]["red"]["team_keys"].map(x => x.replace('frc', ''))
                     }
-                    console.log(moment(snapshot[i]["predicted_time"]).format("h:mm"));
+                    // console.log(moment(snapshot[i]["predicted_time"]).format("h:mm"));
                     array.push(object);
                 }
-                resolve(array);
             }
-            console.log(snapshot[i])
+            resolve(array);
         })
     })
 }
 matchData('2019casj').then(snapshot => {
     console.log(snapshot)
 })
+
+
 
 // function eventList(eventKey) {
 //     return new Promise((resolve, reject) => {
