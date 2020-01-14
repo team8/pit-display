@@ -23,10 +23,15 @@ function matchData(eventId) {
             for (var i in snapshot) {
                 if ("qm" == snapshot[i]["comp_level"]) {
                     // console.log(snapshot[i]["predicted_time"])
-                    var date = new Date(snapshot[i]["predicted_time"] *1000);
+                    var date = new Date(snapshot[i]["predicted_time"] * 1000);
                     console.log(date);
+                    if (date.getMinutes() < 10) {
+                        var official = `${date.getHours()}:0${date.getMinutes()}`
+                    } else {
+                        official = `${date.getHours()}:${date.getMinutes()}`
+                    }
                     var object = {
-                        time: (`${date.getHours()}:${date.getMinutes()}`),
+                        time: official,
                         match: snapshot[i]["match_number"],
                         blue: snapshot[i]["alliances"]["blue"]["team_keys"].map(x => x.replace('frc', '')),
                         red: snapshot[i]["alliances"]["red"]["team_keys"].map(x => x.replace('frc', ''))
