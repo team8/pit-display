@@ -1,52 +1,74 @@
-
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/bootstrap.css' />
-    <link rel="stylesheet" href="/stylesheets/datatables.min.css">
 
-    <script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
-    <script type="text/javascript" src="/js/datatables.min.js"></script>
-    <script type="text/javascript" src="/js/bootstrap.js"></script>
- 
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+<head>
+  <title><%= title %></title>
+  <link rel='stylesheet' href='/stylesheets/bootstrap.css' />
+  <link rel="stylesheet" href="/stylesheets/datatables.min.css">
 
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-    
-    <table id="example" class="table table-bordered" style="width:100%">
+  <script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" src="/js/datatables.min.js"></script>
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
 
-      <thead>
-          <tr>
-              <th>Match #</th>
-              <th class="table-primary">Blue Alliance</th>
-              <th class="table-danger">Red Alliance</th>
-              <th>Time</th>
-              
-          </tr>
-      </thead>
-      <tbody>
-        <% for(var i in array) { %>
-          <tr>
-              <td><%= array[i]["match"] %></td>
-              <td class="table-primary"><%= array[i]["blue"] %></td>
-              <td class="table-danger"><%= array[i]["red"] %></td>
-              <td><%= array[i]["time"] %></td>
-          </tr>
-        <% } %> 
-      </tbody>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+
+</head>
+
+<body>
+  <h1><%= title %></h1>
+  <p>Welcome to <%= title %></p>
+
+  <table id="example" style="width: 100%" class="table table-borderless table-bordered table-sm table-striped">
+    <thead>
+      <tr>
+        <th style="width:  8.33%" scope="col">Match #</th>
+        <th scope="col" colspan="3" class="table-primary text-center">Blue Alliance</th>
+        <th scope="col" colspan="3" class="table-danger text-center">Red Alliance</th>
+        <th style="width:  8.33%" scope="col">Time</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <% for(var i in array) { %>
+      <tr>
+        <% if ((array[i]["blue1"] == "8") || (array[i]["blue2"] == "8") || (array[i]["blue3"] == "8") || (array[i]["red1"] == "8") || (array[i]["red2"] == "8") || (array[i]["red3"] == "8"))  { %>
+        <th scope="row"><%= array[i]["match"] %></th>
+
+        <td style="outline: 0" class="table-primary text-center border-left border-top border-bottom border-dark"><b><%= array[i]["blue1"] %></b></td>
+        <td style="outline: 0" class="table-primary text-center border-top border-bottom border-dark"><b><%= array[i]["blue2"] %></b></td>
+        <td style="outline: 0" class="table-primary text-center border-top border-bottom border-dark"><b><%= array[i]["blue3"] %></b></td>
+
+        <td style="outline: 0" class="table-danger text-center border-top border-bottom border-dark"><b><%= array[i]["red1"] %></b></td>
+        <td style="outline: 0" class="table-danger text-center border-top border-bottom border-dark"><b><%= array[i]["red2"] %></b></td>
+        <td style="outline: 0" class="table-danger text-center border-right border-top border-bottom border-dark"><b><%= array[i]["red3"] %></b></td>
+
+        <td><%= array[i]["time"] %></td>
+        <% } else{ %>
+        <th scope="row"><%= array[i]["match"] %></th>
+
+        <td style="outline: 0" class="table-primary text-center"><%= array[i]["blue1"] %></td>
+        <td style="outline: 0" class="table-primary text-center"><%= array[i]["blue2"] %></td>
+        <td style="outline: 0" class="table-primary text-center"><%= array[i]["blue3"] %></td>
+
+        <td style="outline: 0" class="table-danger text-center"><%= array[i]["red1"] %></td>
+        <td style="outline: 0" class="table-danger text-center"><%= array[i]["red2"] %></td>
+        <td style="outline: 0" class="table-danger text-center"><%= array[i]["red3"] %></td>
+
+        <td><%= array[i]["time"] %></td>
+        <% } %>
+      </tr>
+      <% } %>
+    </tbody>
   </table>
-  </body>
-  <script type="text/javascript"> 
-    $(document).ready( function () {
-      $('#example').DataTable();
-    } );
- </script>
-
-
-  </body>
+</body>
+<script type="text/javascript">
+  $(document).ready(function () {
+    $('#example').DataTable({
+      aaSorting: [[0, "asc"]],
+      pageLength: 100
+    })
+  });
+</script>
+</body>
 
 </html>
