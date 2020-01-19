@@ -7,53 +7,6 @@
   <!-- <link rel="stylesheet" href="/stylesheets/datatables.min.css"> -->
 
   <!-- ^Above Links are untracked^ -->
-<<<<<<< HEAD
-
-  <script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.css" />
-
-  <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.js"></script>
-  <script type="text/javascript" src="/js/bootstrap.js"></script>
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
-  <link rel='stylesheet' href='/stylesheets/style.css' />
-
-</head>
-<script>
-  console.log("sdf");
-  $(document).ready(function () {
-    var table = $('#example').DataTable();
-  });
-  $('input#global_filter').change(function () {
-    console.log("asdf");
-    regExSearch = '^\\s' + this.value + '\\s*$';
-    table.search(regExSearch, true, false).draw();
-    console.log("hello");
-  });
-</script>
-
-<body>
-  <h1><%= title %></h1>
-  <p>Welcome to <%= title %></p>
-  <table style="width: 67%; margin: 0 auto 2em auto; font-family: 'Open Sans', sans-serif;" cellspacing="0"
-    cellpadding="3" border="0">
-    <thead>
-      <tr>
-        <th>Target</th>
-        <th>Search text</th>
-        <th>Treat as regex</th>
-        <th>Use smart search</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr id="filter_global">
-        <td>Global search</td>
-        <td align="center"><input type="text" class="global_filter" id="global_filter"></td>
-        <td align="center"><input type="checkbox" class="global_filter" id="global_regex checked=" checked""></td>
-        <td align="center"><input type="checkbox" class="global_filter" id="global_smart"></td>
-      </tr>
-    </tbody>
-  </table>
-=======
   <script type="text/javascript" src="/js/bootstrap.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
   <link rel='stylesheet' href='/stylesheets/style.css' />
@@ -72,7 +25,6 @@
 <body>
   <h1><%= title %></h1>
   <p>Welcome to <%= title %></p>
->>>>>>> 0865d3dc6568ed2eea9d556f7680d20a23f398c5
   <table id="example" style="width: 100%; font-family: 'Open Sans', sans-serif;"
     class="table table-borderless table-bordered table-sm table-striped">
     <thead>
@@ -91,28 +43,6 @@
     <tbody>
       <% for(var i in array) { %>
       <tr>
-<<<<<<< HEAD
-=======
-        <% if ((array[i]["blue1"] == "8") || (array[i]["blue2"] == "8") || (array[i]["blue3"] == "8") || (array[i]["red1"] == "8") || (array[i]["red2"] == "8") || (array[i]["red3"] == "8"))  { %>
-        <th id="match_col" scope="row"><%= array[i]["match"] %></th>
-
-        <td style="outline: 0" class="table-primary text-center border-left border-top border-bottom border-dark">
-          <b><%= array[i]["blue1"] %></b></td>
-        <td style="outline: 0" class="table-primary text-center border-top border-bottom border-dark">
-          <b><%= array[i]["blue2"] %></b></td>
-        <td style="outline: 0" class="table-primary text-center border-top border-bottom border-dark">
-          <b><%= array[i]["blue3"] %></b></td>
-
-        <td style="outline: 0" class="table-danger text-center border-top border-bottom border-dark">
-          <b><%= array[i]["red1"] %></b></td>
-        <td style="outline: 0" class="table-danger text-center border-top border-bottom border-dark">
-          <b><%= array[i]["red2"] %></b> </td>
-        <td style="outline: 0" class="table-danger text-center border-right border-top border-bottom border-dark">
-          <b><%= array[i]["red3"] %></b></td>
-
-        <td><%= array[i]["time"] %></td>
-        <% } else{ %>
->>>>>>> 0865d3dc6568ed2eea9d556f7680d20a23f398c5
         <th scope="row"><%= array[i]["match"] %></th>
         <% for(var j in array[i]["blue"]) { %>
           <% if (array[i]["blue"][j] == "8")  { %>
