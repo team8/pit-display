@@ -4,10 +4,10 @@
 <head>
   <title><%= title %></title>
   <link rel='stylesheet' href='/stylesheets/bootstrap.css' />
-  <link rel="stylesheet" href="/stylesheets/datatables.min.css">
+  <!-- <link rel="stylesheet" href="/stylesheets/datatables.min.css"> -->
 
-  <link rel="stylesheet" href="/stylesheets/jquery.dataTables.min.css">
   <!-- ^Above Links are untracked^ -->
+<<<<<<< HEAD
 
   <script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.css" />
@@ -53,13 +53,37 @@
       </tr>
     </tbody>
   </table>
+=======
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <link rel="stylesheet" href="/stylesheets/datatables.min.css">
+  <script src="/js/jquery-3.4.1.min.js"></script>
+  <script src="/js/jquery.datatables.min.js"></script>
+  <script>
+    $(document).ready(function(){
+      var table = $('#example').DataTable({
+        "order": [[0, "asc"]],
+        "pageLength": 100,
+      });
+    });
+    </script>
+</head>
+<body>
+  <h1><%= title %></h1>
+  <p>Welcome to <%= title %></p>
+>>>>>>> 0865d3dc6568ed2eea9d556f7680d20a23f398c5
   <table id="example" style="width: 100%; font-family: 'Open Sans', sans-serif;"
     class="table table-borderless table-bordered table-sm table-striped">
     <thead>
       <tr>
         <th style="width:  8.33%" scope="col">Match #</th>
-        <th scope="col" colspan="3" class="table-primary text-center">Blue Alliance</th>
-        <th scope="col" colspan="3" class="table-danger text-center">Red Alliance</th>
+        <th scope="col" class="table-primary text-center"></th>
+        <th class="table-primary text-center">Blue Alliance</th>
+        <th class="table-primary text-center"></th>
+        <th scope="col" class="table-danger text-center"></th>
+        <th class="table-danger text-center">Red Alliance</th>
+        <th class="table-danger"></th>
         <th style="width:  8.33%" scope="col">Time</th>
 
       </tr>
@@ -67,6 +91,28 @@
     <tbody>
       <% for(var i in array) { %>
       <tr>
+<<<<<<< HEAD
+=======
+        <% if ((array[i]["blue1"] == "8") || (array[i]["blue2"] == "8") || (array[i]["blue3"] == "8") || (array[i]["red1"] == "8") || (array[i]["red2"] == "8") || (array[i]["red3"] == "8"))  { %>
+        <th id="match_col" scope="row"><%= array[i]["match"] %></th>
+
+        <td style="outline: 0" class="table-primary text-center border-left border-top border-bottom border-dark">
+          <b><%= array[i]["blue1"] %></b></td>
+        <td style="outline: 0" class="table-primary text-center border-top border-bottom border-dark">
+          <b><%= array[i]["blue2"] %></b></td>
+        <td style="outline: 0" class="table-primary text-center border-top border-bottom border-dark">
+          <b><%= array[i]["blue3"] %></b></td>
+
+        <td style="outline: 0" class="table-danger text-center border-top border-bottom border-dark">
+          <b><%= array[i]["red1"] %></b></td>
+        <td style="outline: 0" class="table-danger text-center border-top border-bottom border-dark">
+          <b><%= array[i]["red2"] %></b> </td>
+        <td style="outline: 0" class="table-danger text-center border-right border-top border-bottom border-dark">
+          <b><%= array[i]["red3"] %></b></td>
+
+        <td><%= array[i]["time"] %></td>
+        <% } else{ %>
+>>>>>>> 0865d3dc6568ed2eea9d556f7680d20a23f398c5
         <th scope="row"><%= array[i]["match"] %></th>
         <% for(var j in array[i]["blue"]) { %>
           <% if (array[i]["blue"][j] == "8")  { %>
@@ -92,5 +138,20 @@
     </tbody>
   </table>
 </body>
+<!-- <script>
+  console.log("sdf");
+  $(document).ready(function() {
+    var table = $('#example').DataTable({
+      "pageLength": 100,
+      "order": [[0, 'asc']]
+    });
+  });
+  $('input#global_filter').change(function () {
+      console.log("asdf");
+      regExSearch = '^\\s' + this.value +'\\s*$';
+      table.search(regExSearch, true, false).draw();      
+      console.log("hello");
+    });
+</script> -->
 
 </html>
